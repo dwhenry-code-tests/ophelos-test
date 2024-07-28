@@ -2,7 +2,7 @@
 
 The below outline the initial plan for the implementation.
 
-## Implementation
+## Planned implementation
 
 - [ ] Add create user auth endpoint to create user and return JWT token (see Notes Authentification)
 - [ ] Add login endpoint to return a new JWT token
@@ -56,3 +56,15 @@ The following is the initial thoughts on how teh API will be structured
     - total_expenditure:
     - disposable_income:
     - ie_rating:
+
+## Implementation steps
+
+### Add quality gems
+
+Add rspec
+
+## Other considerations
+
+### Should the rails application be API only?
+
+I did consider this and it would give some speed benefits, however as this is a technical test I choose to leave the full impelemnattion in (in case you ask for a web page in the follow up questions).
