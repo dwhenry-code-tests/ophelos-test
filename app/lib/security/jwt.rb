@@ -18,7 +18,7 @@ module Security::Jwt
   end
 
   def decode_token(token)
-    JWT.decode token, hmac_secret_key, true, {algorithm: HASHING_ALGORITHM}
+    JWT.decode token, hmac_secret_key, true, { algorithm: HASHING_ALGORITHM }
   end
 
   def exp_payload
@@ -27,5 +27,14 @@ module Security::Jwt
 
   def token_expiry_time
     Time.now.to_i + TTL_MINUTES * 60
+  end
+
+  class Generator
+    include Security::Jwt
+    attr_reader :current_user
+
+    def initialize(user)
+      @current_user = user
+    end
   end
 end

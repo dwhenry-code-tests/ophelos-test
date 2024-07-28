@@ -5,8 +5,9 @@ The below outline the initial plan for the implementation.
 ## Planned implementation
 
 - [X] Add create user auth endpoint to create user and return JWT token (see Notes Authentification)
-- [ ] Add login endpoint to return a new JWT token
-- [ ] Endpoint to create/retrieval of I & E statements (see Notes API Definition)
+- [X] Add login endpoint to return a new JWT token
+- [X] Endpoint to create I & E statements (see Notes API Definition)
+- [ ] Endpoint to retrieval I & E statements (see Notes API Definition)
 
 ## Notes
 
@@ -57,14 +58,21 @@ The following is the initial thoughts on how teh API will be structured
     - disposable_income:
     - ie_rating:
 
-## Implementation steps
-
-### Add quality gems
-
-Add rspec
 
 ## Other considerations
 
 ### Should the rails application be API only?
 
 I did consider this and it would give some speed benefits, however as this is a technical test I choose to leave the full impelemnattion in (in case you ask for a web page in the follow up questions).
+
+### Authentication in the API
+
+Ideally the JWT token would be in the headers as this more secure and also simplify the message passing, however as this a test application I will instead put the token in the request/response body as this is easier to test.
+
+### Storing amount in the DB
+
+I have stored all amounts as decimals to avoid rounding issues that you can otherwise see when using floats. This is accuming that all incomes and expenditures are in whole pennies.
+
+### Type of Disposable Income
+
+In the DB it is always a Decimal, but when I return it this result in it should as a string. In order to avoid this I have converted it to a float when output. The other option would be to report it in whole pence values instead. At this stage I have just left as a float in the output.
