@@ -8,6 +8,9 @@ Rails 7.1.3.4
 
 * [Decision log](DECISONS.md)
 
+* Environment variables:
+Stored in .env file for local development and testing
+
 ## Getting Started
 
 Clone the repository, and follow these steps in order.
