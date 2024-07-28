@@ -1,24 +1,28 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
+#  Ophelos techincal test
 
 * Ruby version
+ruby 3.1.2
 
-* System dependencies
+* Rails version
+Rails 7.1.3.4
 
-* Configuration
+* [Decision log](DECISONS.md)
 
-* Database creation
+## Getting Started
 
-* Database initialization
+Clone the repository, and follow these steps in order.
+The instructions assume you have the correct version of ruby installed on your machine. If not, please install all this first.
 
-* How to run the test suite
+**1. Pre-requirements**
 
-* Services (job queues, cache servers, search engines, etc.)
+* `bundle install`
 
-* Deployment instructions
+**2. Run the app locally**
 
-* ...
+Once all the above is done, you should be able to run the application as follows:
+
+`rails server`
+
+**3. Tests**
+
+To run the test suite, run `bundle exec rspec`.
