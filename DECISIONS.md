@@ -58,11 +58,12 @@ The following is the initial thoughts on how teh API will be structured
     - disposable_income:
     - ie_rating:
 
-## Implementation steps
 
-### Add quality gems
+## Other considerations
 
-Add rspec
+### Should the rails application be API only?
+
+I did consider this and it would give some speed benefits, however as this is a technical test I choose to leave the full impelemnattion in (in case you ask for a web page in the follow up questions).
 
 ### Authentication in the API
 
@@ -72,8 +73,6 @@ Ideally the JWT token would be in the headers as this more secure and also simpl
 
 I have stored all amounts as decimals to avoid rounding issues that you can otherwise see when using floats. This is accuming that all incomes and expenditures are in whole pennies.
 
-## Other considerations
+### Type of Disposable Income
 
-### Should the rails application be API only?
-
-I did consider this and it would give some speed benefits, however as this is a technical test I choose to leave the full impelemnattion in (in case you ask for a web page in the follow up questions).
+In the DB it is always a Decimal, but when I return it this result in it should as a string. In order to avoid this I have converted it to a float when output. The other option would be to report it in whole pence values instead. At this stage I have just left as a float in the output.

@@ -9,15 +9,15 @@ module V1
       if creator.call(statement_params)
         render json: { statement: creator.statement.as_json, token: generate_jwt }
       else
-        render json: { errors: creator.errors, token: generate_jwt }, status: 409
+        render json: { errors: creator.errors.full_messages, token: generate_jwt }, status: 409
       end
     end
 
     def show
-      statement = Statement.find(params[:id])
+      statement = current_user.statements.find_by(year: params[:id])
 
       if statement
-        render json: { statement: statement.as_jsno, token: generate_jwt }
+        render json: { statement: statement.as_json, token: generate_jwt }
       else
         render json: { errors: ["Statement not found"], token: generate_jwt }, status: 404
       end

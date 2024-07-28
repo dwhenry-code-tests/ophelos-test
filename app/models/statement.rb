@@ -2,9 +2,13 @@ class Statement < ApplicationRecord
   belongs_to :user
   has_many :statement_items
 
-  validates :year, presence: true
+  validates :year, presence: true, uniqueness: { scope: :user }
 
   def as_json(*)
-    super.slice("year", "disposable_income", "ie_rating")
+    {
+      "year" => year,
+      "disposable_income" => disposable_income.to_f,
+      "ie_rating" => ie_rating
+    }
   end
 end
