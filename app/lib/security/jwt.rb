@@ -18,7 +18,7 @@ module Security::Jwt
   end
 
   def decode_token(token)
-    JWT.decode token, hmac_secret_key, true, {algorithm: HASHING_ALGORITHM}
+    JWT.decode token, hmac_secret_key, true, { algorithm: HASHING_ALGORITHM }
   end
 
   def exp_payload
@@ -37,5 +37,4 @@ module Security::Jwt
       @current_user = user
     end
   end
-
 end

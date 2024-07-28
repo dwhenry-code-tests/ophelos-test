@@ -27,10 +27,10 @@ module V1
 
     def authenticate_user!
       user_id = begin
-                  params[:token] && decode_token(params[:token]).first["user_id"]
-                rescue JWT::ExpiredSignature, JWT::VerificationError, JWT::DecodeError
-                  nil
-                end
+        params[:token] && decode_token(params[:token]).first["user_id"]
+      rescue JWT::ExpiredSignature, JWT::VerificationError, JWT::DecodeError
+        nil
+      end
 
       @current_user = User.find_by(id: user_id)
 

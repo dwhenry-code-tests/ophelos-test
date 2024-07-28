@@ -1,5 +1,6 @@
 class StatementCreator
   attr_reader :user
+  delegate :errors, to: :statement
 
   def initialize(user)
     @user = user
@@ -27,25 +28,31 @@ class StatementCreator
   private
 
   def disposable_income
-    items = statement.statement_items.group_by(&:item_type)
-    income = items.fetch('incomes', []).sum(&:amount)
-    expenditure = items.fetch('expenditures', []).sum(&:amount)
-
-    income - expenditure
+    [
+      BigDecimal("0.0"),
+      income_and_expenditure[:income] - income_and_expenditure[:expenditure]
+    ].max
   end
 
   def ie_rating
-    items = statement.statement_items.group_by(&:item_type)
-    income = items.fetch('incomes', []).sum(&:amount)
-    expenditure = items.fetch('expenditures', []).sum(&:amount)
+    return "D" if income_and_expenditure[:income].zero?
 
-    return "D" if income.zero?
-
-    case expenditure / income
+    case income_and_expenditure[:expenditure] / income_and_expenditure[:income]
     when (0...0.1) then "A"
     when (0.1...0.3) then "B"
     when (0.3...0.5) then "C"
     else "D"
     end
+  end
+
+  def income_and_expenditure
+    @income_and_expenditure ||=
+      begin
+        items = statement.statement_items.group_by(&:item_type)
+        {
+          income: items.fetch('incomes', []).sum(&:amount),
+          expenditure: items.fetch('expenditures', []).sum(&:amount)
+        }
+      end
   end
 end

@@ -24,9 +24,12 @@ RSpec.describe "Statements" do
   end
 
   context "when valid token" do
+    let(:token) { Security::Jwt::Generator.new(user).generate_jwt }
+
     it "creates a new statement for the current year" do
-      token = Security::Jwt::Generator.new(user).generate_jwt
-      expect { post '/v1/statements', params: { statement: statement, token: token } }.to change(Statement, :count).by(1)
+      expect {
+        post '/v1/statements', params: { statement: statement, token: token }
+      }.to change(Statement, :count).by(1)
 
       expect(response.status).to eq(200)
       expect(JSON.parse(response.body)).to match(
@@ -37,6 +40,23 @@ RSpec.describe "Statements" do
         },
         "token" => an_instance_of(String)
       )
+    end
+
+    context "when invalid data" do
+      let(:incomes) { [{ name: 'salary', amount: nil }] }
+
+      it "error a description of the error" do
+        expect {
+          post '/v1/statements', params: { statement: statement, token: token }
+        }.not_to change(Statement, :count)
+
+        expect(response.status).to eq(409)
+        # TODO: better nested errors
+        expect(JSON.parse(response.body)).to match(
+          "errors" => {"statement_items" => ["is invalid"]},
+          "token" => an_instance_of(String)
+        )
+      end
     end
   end
 end

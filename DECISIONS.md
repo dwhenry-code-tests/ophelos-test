@@ -5,8 +5,9 @@ The below outline the initial plan for the implementation.
 ## Planned implementation
 
 - [X] Add create user auth endpoint to create user and return JWT token (see Notes Authentification)
-- [ ] Add login endpoint to return a new JWT token
-- [ ] Endpoint to create/retrieval of I & E statements (see Notes API Definition)
+- [X] Add login endpoint to return a new JWT token
+- [X] Endpoint to create I & E statements (see Notes API Definition)
+- [ ] Endpoint to retrieval I & E statements (see Notes API Definition)
 
 ## Notes
 
