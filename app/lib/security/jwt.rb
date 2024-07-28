@@ -28,4 +28,14 @@ module Security::Jwt
   def token_expiry_time
     Time.now.to_i + TTL_MINUTES * 60
   end
+
+  class Generator
+    include Security::Jwt
+    attr_reader :current_user
+
+    def initialize(user)
+      @current_user = user
+    end
+  end
+
 end

@@ -63,6 +63,14 @@ The following is the initial thoughts on how teh API will be structured
 
 Add rspec
 
+### Authentication in the API
+
+Ideally the JWT token would be in the headers as this more secure and also simplify the message passing, however as this a test application I will instead put the token in the request/response body as this is easier to test.
+
+### Storing amount in the DB
+
+I have stored all amounts as decimals to avoid rounding issues that you can otherwise see when using floats. This is accuming that all incomes and expenditures are in whole pennies.
+
 ## Other considerations
 
 ### Should the rails application be API only?

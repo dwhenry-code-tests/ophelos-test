@@ -7,5 +7,6 @@ Rails.application.routes.draw do
 
   namespace 'v1' do
     resource :users, only: %i[create show]
+    resources :statements, only: %i[create show]
   end
 end

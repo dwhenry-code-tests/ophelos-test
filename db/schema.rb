@@ -10,11 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_28_141956) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_28_151637) do
+  create_table "statement_items", force: :cascade do |t|
+    t.integer "statement_id", null: false
+    t.string "item_type"
+    t.string "name"
+    t.decimal "amount", precision: 10, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["statement_id"], name: "index_statement_items_on_statement_id"
+  end
+
+  create_table "statements", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "year"
+    t.decimal "disposable_income", precision: 10, scale: 2
+    t.string "ie_rating"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_statements_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "statement_items", "statements"
+  add_foreign_key "statements", "users"
 end
