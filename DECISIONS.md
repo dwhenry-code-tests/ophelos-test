@@ -76,3 +76,17 @@ I have stored all amounts as decimals to avoid rounding issues that you can othe
 ### Type of Disposable Income
 
 In the DB it is always a Decimal, but when I return it this result in it should as a string. In order to avoid this I have converted it to a float when output. The other option would be to report it in whole pence values instead. At this stage I have just left as a float in the output.
+
+## Next steps
+
+The following is a list of things that could be added to make the system work better:
+
+**Code cleanup**
+* Use FactoryBot to create fixtures
+* extract API auth logic to a separate module so it wasn't in the controller
+
+**Code extension**
+* Look at creating users with multiple years of data
+* Sharing the statements a user has created with a validated third party
+* more tests, have only covered the main case in what I have here - add a tool like `SimpleCov` to help identify any branches without tests
+
